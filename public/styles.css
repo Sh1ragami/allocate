@@ -3,24 +3,30 @@
 }
 
 :root {
-  --bg: #0b1020;
-  --bg-elev: #111827;
-  --card-border: #1f2937;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --accent: #60a5fa;
-  --accent-strong: #3b82f6;
-  --surface: #0b1220;
-  --surface-border: #243047;
-  --radius: 14px;
-  --radius-sm: 10px;
-  --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  --bg: var(--color-canvas-default);
+  --bg-elev: var(--color-canvas-subtle);
+  --card-border: var(--color-border-default);
+  --text: var(--color-fg-default);
+  --muted: var(--color-fg-muted);
+  --accent: var(--color-accent-fg);
+  --accent-strong: var(--color-accent-emphasis);
+  --surface: var(--color-canvas-subtle);
+  --surface-border: var(--color-border-default);
+  --radius: 6px;
+  --radius-sm: 4px;
+  --shadow: 0 1px 0 rgba(1,4,9,.1);
 }
 
 .layout {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
 /* two-column layout disabled by default; full-width handled by .view-actions */
@@ -31,43 +37,17 @@
 
 body {
   margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
   background: var(--bg);
   color: var(--text);
-  font-size: 17px;
+  font-size: 14px;
 }
 
 .container {
-  max-width: none;
+  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  padding: 16px 24px;
-}
-
-header {
-  margin-bottom: 18px;
-}
-
-h1 {
-  margin: 0 0 6px 0;
-  font-size: 36px;
-  letter-spacing: .2px;
-}
-
-.desc {
-  margin: 0;
-  color: var(--muted);
-}
-
-.hero {
-  padding: 12px 0;
-}
-
-.header-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  padding: 16px;
 }
 
 .header-user {
@@ -93,10 +73,10 @@ h1 {
 }
 
 .card {
-  background: transparent;
-  border: 0;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  padding: 18px;
+  padding: 16px;
   margin-top: 12px;
   min-height: 120px;
 }
