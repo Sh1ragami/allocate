@@ -1,0 +1,429 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0b1020;
+  --bg-elev: #111827;
+  --card-border: #1f2937;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --accent: #60a5fa;
+  --accent-strong: #3b82f6;
+  --surface: #0b1220;
+  --surface-border: #243047;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* two-column layout disabled by default; full-width handled by .view-actions */
+
+.col {
+  min-width: 0;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+}
+
+.container {
+  max-width: none;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+header {
+  margin-bottom: 18px;
+}
+
+h1 {
+  margin: 0 0 6px 0;
+  font-size: 36px;
+  letter-spacing: .2px;
+}
+
+.desc {
+  margin: 0;
+  color: var(--muted);
+}
+
+.hero {
+  padding: 12px 0;
+}
+
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--surface-border);
+}
+
+.header-user .name {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.header-user .btn {
+  padding: 6px 10px;
+}
+
+.card {
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-top: 12px;
+  min-height: 120px;
+}
+
+/* Centered login card */
+.center-wrap {
+  min-height: calc(100vh - 120px);
+  display: grid;
+  place-items: center;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 460px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  margin-bottom: 8px;
+}
+
+.user img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid #374151;
+}
+
+.user .name {
+  font-weight: 600;
+}
+
+.message {
+  display: none;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.btn {
+  border: 1px solid #374151;
+  background: #1f2937;
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: transform .06s ease, filter .15s ease, box-shadow .15s ease;
+}
+
+.btn:hover {
+  filter: brightness(1.08);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  background: #0b3b63;
+}
+
+footer {
+  margin-top: 24px;
+  color: var(--muted);
+}
+
+/* ---- UI Enhancements ---- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 860px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  margin: 6px 0 10px 0;
+}
+
+input:focus,
+textarea:focus,
+.btn:focus,
+.tab:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, .25);
+  border-color: var(--accent);
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+label {
+  color: #c9d1d9;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section-title {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+}
+
+.hint {
+  color: #9ca3af;
+  font-size: 12px;
+  margin: 4px 0 8px 0;
+}
+
+.result {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.result a {
+  color: var(--accent);
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.row>.grow {
+  flex: 1;
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.list {
+  margin-top: 12px;
+}
+
+.repo-item {
+  cursor: pointer;
+}
+
+.repo-name {
+  font-weight: 600;
+  font-size: 18px;
+  color: #58a6ff;
+}
+
+.repo-meta {
+  color: #9ca3af;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.Box-row.repo-item {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.Box-row.repo-item:hover {
+  background: #161b22;
+}
+
+.Box {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.Box-row {
+  border-top: 1px solid #21262d !important;
+  background: transparent !important;
+}
+
+.Box-row:first-child {
+  border-top: 0 !important;
+}
+
+.lang-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tab {
+  border: 1px solid var(--surface-border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+/* GitHub-like underline tabs */
+.tabs-underline {
+  gap: 4px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.tabs-underline .tab {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 10px 12px;
+  color: var(--muted);
+}
+
+.tabs-underline .tab:hover {
+  color: var(--text);
+}
+
+.tabs-underline .tab.active {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+
+/* ---- Actions form layout ---- */
+.selected-repo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  margin: 8px 0 12px 0;
+}
+
+.selected-repo .name {
+  font-weight: 600;
+}
+
+.form {
+  display: grid;
+  gap: 10px;
+}
+
+.cols-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+@media (min-width: 720px) {
+  .cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.actions-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Utility & SPA panels */
+.hidden {
+  display: none;
+}
+
+.section-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.actions-panel {
+  display: none;
+}
+
+.actions-panel.active {
+  display: block;
+}
+
+/* Full-width Action View */
+.layout.view-actions {
+  grid-template-columns: 1fr;
+}
+
+.layout.view-actions .col:first-child {
+  display: none;
+}
+
+.layout.view-actions #gh-actions {
+  display: block !important;
+}
