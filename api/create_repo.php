@@ -49,7 +49,11 @@ curl_close($ch);
 
 $data = json_decode($res, true);
 if ($status >= 400) {
-  $msg = is_array($data) && isset($data['message']) ? $data['message'] : $res;
+  $log_file = __DIR__ . '/error.log';
+  $log_message = date('Y-m-d H:i:s') . " - GitHub API Error: " . $res . "\n";
+  file_put_contents($log_file, $log_message, FILE_APPEND);
+
+  $msg = is_array($data) && isset($data['message']) ? $data['message'] : 'Repository creation failed.';
   json_error('GitHub API error: ' . $msg, $status);
 }
 

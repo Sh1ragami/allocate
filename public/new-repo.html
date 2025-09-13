@@ -36,6 +36,15 @@
                   <div class="field"><label>Private</label><label><input type="checkbox" id="repo-private" /> private</label></div>
                 </div>
                 <div class="field"><label>Description</label><input id="repo-desc" placeholder="description (optional)" /></div>
+                <div class="field"><label>Application Idea</label><textarea id="app-idea" placeholder="Describe the application you want to build..."></textarea></div>
+                <div class="field">
+                  <label>Collaborators</label>
+                  <div id="collaborators-list"></div>
+                  <div class="d-flex flex-items-center mt-2">
+                    <input type="text" id="new-collaborator-login" class="form-control" placeholder="Search for users to add as collaborators">
+                  </div>
+                  <div id="collaborator-search-results" class="mt-2"></div>
+                </div>
                 <div class="actions-row">
                   <button id="btn-create-repo" class="btn btn-primary">Create Repository</button>
                   <span id="res-repo" class="result"></span>
