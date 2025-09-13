@@ -23,9 +23,15 @@
 
       <div class="Box">
         <div class="Box-header">
-          <input id="repo-filter" class="form-control" placeholder="Find a repository..." />
+          <div class="UnderlineNav">
+            <button class="UnderlineNav-item selected" data-tab="user">Personal</button>
+            <button class="UnderlineNav-item" data-tab="org">Organization</button>
+          </div>
         </div>
-        <div id="repo-list"></div>
+        <div class="Box-body">
+          <input id="repo-filter" class="form-control mb-3" placeholder="Find a repository..." />
+          <div id="repo-list"></div>
+        </div>
       </div>
     </div>
 

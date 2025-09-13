@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>アロケート - Repository</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/build.css" />
   </head>
   <body>
     <header class="Header">
@@ -18,25 +17,23 @@
 
     <div class="container">
       <div class="d-flex flex-justify-between flex-items-center mb-3">
-        <h2 class="h3 m-0" id="repo-full-name"></h2>
+        <h1 class="h2" id="repo-full-name"></h1>
         <a href="./index.html" class="btn">Back to Repositories</a>
       </div>
 
       <div class="Box">
         <div class="Box-header">
           <div class="UnderlineNav">
-            <div class="UnderlineNav-body">
-              <button class="UnderlineNav-item selected" data-panel="panel-issue">Issue</button>
-              <button class="UnderlineNav-item" data-panel="panel-pr">Pull Request</button>
-            </div>
+            <button class="UnderlineNav-item selected" data-panel="panel-issue">Issue</button>
+            <button class="UnderlineNav-item" data-panel="panel-pr">Pull Request</button>
           </div>
         </div>
         <div id="panel-issue" class="Box-body actions-panel active">
-          <div class="form-group">
+          <div class="form-group mb-3">
             <label>Title</label>
             <input type="text" id="issue-title" class="form-control" placeholder="title" />
           </div>
-          <div class="form-group">
+          <div class="form-group mb-3">
             <label>Body</label>
             <textarea id="issue-body" class="form-control" placeholder="body (optional)"></textarea>
           </div>
@@ -45,22 +42,22 @@
             <span id="res-issue" class="ml-2"></span>
           </div>
         </div>
-        <div id="panel-pr" class="Box-body actions-panel">
-          <div class="form-group">
+        <div id="panel-pr" class="Box-body actions-panel" style="display: none;">
+          <div class="form-group mb-3">
             <label>Title</label>
             <input type="text" id="pr-title" class="form-control" placeholder="title" />
           </div>
-          <div class="d-flex flex-wrap gutter">
-            <div class="col-6 form-group">
+          <div class="d-flex" style="gap: var(--spacing-3)">
+            <div class="form-group mb-3" style="flex: 1;">
               <label>Head</label>
               <input type="text" id="pr-head" class="form-control" placeholder="head (branch or owner:branch)" />
             </div>
-            <div class="col-6 form-group">
+            <div class="form-group mb-3" style="flex: 1;">
               <label>Base</label>
               <input type="text" id="pr-base" class="form-control" placeholder="base branch (e.g. main)" />
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group mb-3">
             <label>Body</label>
             <textarea id="pr-body" class="form-control" placeholder="body (optional)"></textarea>
           </div>

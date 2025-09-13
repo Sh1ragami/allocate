@@ -7,13 +7,14 @@
   --color-fg-default: #e6edf3;
   --color-fg-muted: #8b949e;
   --color-accent-fg: #58a6ff;
+  --color-accent-orange: #f78166;
   --color-success-fg: #3fb950;
   --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
   --font-size-base: 14px;
-  --font-size-h1: 2rem;
-  --font-size-h2: 1.5rem;
-  --font-size-h3: 1.25rem;
-  --font-size-h4: 1rem;
+  --font-size-h1: 1.5rem;
+  --font-size-h2: 1.25rem;
+  --font-size-h3: 1rem;
+  --font-size-h4: 0.875rem;
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 16px;
@@ -56,9 +57,42 @@ body {
   gap: var(--spacing-3);
 }
 
+.Header-link {
+  color: var(--color-fg-default);
+  text-decoration: none;
+  font-weight: 600;
+}
+
 .Header-link.active {
-  color: var(--color-accent-fg);
-  border-bottom: 2px solid var(--color-accent-fg);
+  color: var(--color-fg-default);
+  border-bottom: 2px solid var(--color-accent-orange);
+}
+
+.UnderlineNav {
+  display: flex;
+  border-bottom: 1px solid var(--color-border-default);
+  margin-bottom: var(--spacing-3);
+}
+
+.UnderlineNav-item {
+  padding: var(--spacing-2) var(--spacing-3);
+  color: var(--color-fg-default);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+button.UnderlineNav-item {
+  background: none;
+  border: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.UnderlineNav-item.selected {
+  color: var(--color-fg-default);
+  border-bottom-color: var(--color-accent-orange);
+  font-weight: 600;
 }
 
 .repo-name {
@@ -135,6 +169,11 @@ body {
 .Box-footer {
   padding: var(--spacing-3);
   border-top: 1px solid var(--color-border-default);
+  display: flex;
+}
+
+.Box-footer .form-control {
+  flex: 1;
 }
 
 .Box-row {
@@ -172,6 +211,7 @@ body {
   background-color: var(--color-canvas-inset);
   border-radius: var(--border-radius);
   padding: var(--spacing-2);
+  min-height: 200px;
 }
 
 .kanban-column-title {
@@ -184,9 +224,24 @@ body {
 .kanban-card {
   background-color: var(--color-canvas-overlay);
   border: 1px solid var(--color-border-muted);
+  border-left-width: 4px;
   border-radius: var(--border-radius);
   padding: var(--spacing-2);
   margin-bottom: var(--spacing-2);
+}
+
+.kanban-card-labels {
+  margin-top: var(--spacing-2);
+}
+
+.Label {
+  display: inline-block;
+  padding: 0 7px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  border-radius: 2em;
+  border: 1px solid transparent;
 }
 
 h1, .h1 { font-size: var(--font-size-h1); }
@@ -212,3 +267,42 @@ h4, .h4 { font-size: var(--font-size-h4); }
 .d-flex { display: flex; }
 .flex-items-center { align-items: center; }
 .flex-justify-between { justify-content: space-between; }
+
+.placeholder-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-fg-subtle);
+  border-radius: 50%;
+}
+
+.placeholder-text {
+  width: 100px;
+  height: 20px;
+  background-color: var(--color-fg-subtle);
+  border-radius: var(--border-radius);
+}
+
+.kanban-card-assignees {
+  position: relative;
+}
+
+.assignee-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--color-canvas-overlay);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--border-radius);
+  z-index: 10;
+  min-width: 150px;
+}
+
+.assignee-dropdown-item {
+  padding: var(--spacing-2);
+  cursor: pointer;
+}
+
+.assignee-dropdown-item:hover {
+  background-color: var(--color-accent-fg);
+  color: var(--color-canvas-default);
+}

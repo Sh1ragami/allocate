@@ -15,15 +15,24 @@ function setMessage(text) {
 
 function renderUser(user) {
   const headerUser = document.getElementById("header-user");
-  if (!user) {
-    if (headerUser) headerUser.innerHTML = `<a href="/public/login.html" class="btn">Login with GitHub</a>`;
+  if (!headerUser) return;
+
+  if (user === undefined) { // undefined means still loading
+    headerUser.innerHTML = `
+      <div class="placeholder-avatar"></div>
+      <div class="placeholder-text"></div>
+    `;
     return;
   }
+
+  if (user === null) { // null means not logged in
+    headerUser.innerHTML = `<a href="/public/login.html" class="btn">Login with GitHub</a>`;
+    return;
+  }
+
   const login = user.login || user.name || "(unknown)";
   const avatar = user.avatar_url ? `<img class="avatar" src="${user.avatar_url}" alt="avatar" />` : "";
-  if (headerUser) {
-    headerUser.innerHTML = `${avatar}<span class="name">${login}</span><button id="logout-btn" class="btn btn-secondary">Logout</button>`;
-  }
+  headerUser.innerHTML = `${avatar}<span class="name">${login}</span><button id="logout-btn" class="btn btn-secondary">Logout</button>`;
 }
 
 // Simple POST helper
@@ -43,6 +52,8 @@ async function postJSON(url, data) {
 
 // ============ Main ============
 (async function main() {
+  renderUser(undefined); // Show placeholder initially
+
   // Check session
   try {
     const me = await fetch(`${API_BASE}/me.php`, { credentials: "include" }).then(r => r.json());

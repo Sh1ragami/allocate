@@ -57,4 +57,13 @@ if ($status >= 400) {
   json_error('GitHub API error: ' . $msg, $status);
 }
 
+// Add project to database and set creator as owner
+$repoFullName = $data['full_name'];
+$stmt = $db->prepare("INSERT INTO projects (repo_full_name) VALUES (?)");
+$stmt->execute([$repoFullName]);
+$projectId = $db->lastInsertId();
+
+$stmt = $db->prepare("INSERT INTO project_users (project_id, user_id, role) VALUES (?, ?, ?)");
+$stmt->execute([$projectId, $user['id'], 'owner']);
+
 json_out(['ok' => true, 'repo' => $data]);
