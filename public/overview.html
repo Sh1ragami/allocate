@@ -23,12 +23,66 @@
         </div>
       </header>
 
-      <div class="layout">
-        <div class="col">
-          <section class="card">
-            <h2 class="h3 m-0">Overview</h2>
-            <p class="mt-3">This is the overview page. Content to be added.</p>
-          </section>
+      <div id="empty-view" class="text-center p-5">
+        <h2 class="h3 m-0">No project selected</h2>
+        <p class="mt-3">Please select a project to see the overview.</p>
+        <a href="./index.html" class="btn btn-primary mt-3">Go to Repositories</a>
+      </div>
+
+      <div id="dashboard-view" style="display: none;">
+        <div class="d-flex flex-justify-between flex-items-center">
+            <h2 class="h3 m-0" id="project-name"></h2>
+            <button id="clear-project-btn" class="btn btn-secondary">Select another project</button>
+        </div>
+
+        <div class="layout mt-3">
+          <div class="col-md-8">
+            <section class="card mb-3">
+              <h2 class="h3 m-0">Contribution Graph</h2>
+              <div class="mt-3" id="contribution-graph"></div>
+            </section>
+          </div>
+          <div class="col-md-4">
+            <section class="card">
+              <h2 class="h3 m-0">Tasks</h2>
+              <div class="mt-3" id="summary-stats"></div>
+            </section>
+            <section class="card mt-3">
+              <h2 class="h3 m-0">Collaborators</h2>
+              <div class="mt-3" id="collaborators-list"></div>
+              <div class="mt-3">
+                <input type="text" id="new-collaborator-login" class="form-control" placeholder="Enter GitHub login">
+                <button id="add-collaborator-btn" class="btn btn-primary mt-2">Add Collaborator</button>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="layout mt-3">
+          <div class="col">
+            <section class="card">
+              <div class="d-flex flex-justify-between flex-items-center">
+                <h2 class="h3 m-0">Kanban Board</h2>
+                <select id="collaborator-filter" class="form-select select-sm">
+                  <option value="all">All Collaborators</option>
+                </select>
+              </div>
+              <div class="kanban-board mt-3">
+                <div class="kanban-column">
+                  <h3 class="kanban-column-title">To Do</h3>
+                  <div class="kanban-column-content"></div>
+                </div>
+                <div class="kanban-column">
+                  <h3 class="kanban-column-title">In Progress</h3>
+                  <div class="kanban-column-content"></div>
+                </div>
+                <div class="kanban-column">
+                  <h3 class="kanban-column-title">Done</h3>
+                  <div class="kanban-column-content"></div>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
       </div>
 
@@ -38,5 +92,6 @@
     </div>
 
     <script src="./js/app.js"></script>
+    <script src="./js/overview.js"></script>
   </body>
 </html>

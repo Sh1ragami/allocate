@@ -39,8 +39,8 @@
           ★ ${r.stargazers_count}
         </div>`;
       el.addEventListener("click", () => {
-        const [owner, repo] = r.full_name.split("/");
-        location.href = `./repo.html?owner=${owner}&repo=${repo}`;
+        localStorage.setItem("selectedRepo", r.full_name);
+        location.href = "./overview.html";
       });
       list.appendChild(el);
     });

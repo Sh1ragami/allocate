@@ -6,13 +6,13 @@ require __DIR__ . '/config.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   json_error('Method not allowed', 405);
 }
-$_SESSION = [];
-if (ini_get('session.use_cookies')) {
-  $params = session_get_cookie_params();
-  setcookie(session_name(), '', time() - 42000,
-    $params['path'], $params['domain'],
-    $params['secure'], $params['httponly']
-  );
+
+if (isset($_COOKIE['session_token'])) {
+  $sessionToken = $_COOKIE['session_token'];
+  $stmt = $db->prepare("UPDATE users SET session_token = NULL, session_token_expires_at = NULL WHERE session_token = ?");
+  $stmt->execute([$sessionToken]);
 }
-session_destroy();
+
+setcookie('session_token', '', time() - 3600, '/');
+
 json_out(['ok' => true]);

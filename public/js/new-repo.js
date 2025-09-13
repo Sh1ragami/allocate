@@ -14,7 +14,8 @@
     btn.disabled = true;
     try {
       const res = await postJSON(`${API_BASE}/create_repo.php`, { name, description, private: isPrivate });
-      if(resEl) resEl.innerHTML = `Repo created: <a href="${res.repo.html_url}" target="_blank" rel="noreferrer">${res.repo.full_name}</a>`;
+      localStorage.setItem("selectedRepo", res.repo.full_name);
+      location.href = "./overview.html";
     } catch (e) {
       if(resEl) resEl.textContent = "Create repo failed: " + e.message;
     }

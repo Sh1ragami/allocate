@@ -427,3 +427,76 @@ label {
 .layout.view-actions #gh-actions {
   display: block !important;
 }
+
+/* Overview Page */
+.col-md-8 {
+  grid-column: span 2;
+}
+
+.col-md-4 {
+  grid-column: span 1;
+}
+
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.kanban-column {
+  background: #0d1117;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+
+.kanban-column-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.kanban-column-content {
+  min-height: 200px;
+}
+
+.kanban-card {
+  background: #1f2937;
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  margin-bottom: 8px;
+  cursor: grab;
+}
+
+.kanban-card-title {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.kanban-card-title:hover {
+  color: var(--accent);
+}
+
+.kanban-card-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.kanban-card-assignees {
+  margin-top: 8px;
+  display: flex;
+}
+
+.avatar-small {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+#contribution-graph {
+  min-height: 150px; /* Placeholder height */
+}

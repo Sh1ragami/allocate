@@ -6,7 +6,9 @@ require __DIR__ . '/config.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   json_error('Method not allowed', 405);
 }
-if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in'] || !isset($_SESSION['access_token'])) {
+
+$user = get_user_from_session_token();
+if (!$user) {
   json_error('Unauthorized', 401);
 }
 
@@ -29,7 +31,7 @@ $ch = curl_init('https://api.github.com/user/repos');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-  'Authorization: Bearer ' . $_SESSION['access_token'],
+  'Authorization: Bearer ' . $user['access_token'],
   'Accept: application/vnd.github+json',
   'X-GitHub-Api-Version: 2022-11-28',
   'User-Agent: php-github-oauth-demo',
