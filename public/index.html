@@ -1,72 +1,32 @@
 <!doctype html>
-<html lang="ja" data-color-mode="dark" data-dark-theme="dark_dimmed">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>アロケート</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@primer/css@latest/dist/primer.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/build.css" />
   </head>
   <body>
-    <div class="container">
-      <header class="hero">
-        <div class="header-bar">
-          <div class="d-flex flex-items-center">
-            <h1 class="h2">アロケート</h1>
-            <nav class="ml-4">
-              <a href="./overview.html" class="btn">Overview</a>
-              <a href="./index.html" class="btn btn-primary">Repositories</a>
-            </nav>
-          </div>
-          <div id="header-user" class="header-user"></div>
-        </div>
-      </header>
+    <header class="Header">
+      <div class="Header-item">
+        <a href="./overview.html" class="Header-link">Overview</a>
+        <a href="./index.html" class="Header-link">Repositories</a>
+      </div>
+      <div class="Header-item" id="header-user"></div>
+    </header>
 
-      <div class="layout">
-        <div class="col" id="col-repos">
-          <section class="card" id="repo-browser">
-            <div class="d-flex flex-justify-between flex-items-center">
-              <h2 class="h3 m-0">Repositories</h2>
-              <a href="./new-repo.html" class="btn btn-primary">
-                <span class="octicon octicon-repo mr-2"></span>New
-              </a>
-            </div>
-            <div class="UnderlineNav my-2" id="repo-tabs">
-              <nav class="UnderlineNav-body">
-                <button class="UnderlineNav-item selected" data-tab="user">Personal</button>
-                <button class="UnderlineNav-item" data-tab="org">Organization</button>
-              </nav>
-            </div>
-            <div class="d-flex flex-items-center flex-justify-between mb-2">
-              <div class="flex-1 mr-2">
-                <input id="repo-filter" class="form-control input-block" placeholder="Find a repository..." />
-              </div>
-              <div class="d-flex gap-2">
-                <select id="repo-type" class="form-select select-sm mr-2">
-                  <option value="all">Type</option>
-                  <option value="owner">Owner</option>
-                  <option value="collaborator">Collaborator</option>
-                  <option value="org">Organization member</option>
-                </select>
-                <select id="repo-lang" class="form-select select-sm mr-2">
-                  <option value="">Language</option>
-                </select>
-                <select id="repo-sort" class="form-select select-sm">
-                  <option value="updated">Sort: Updated</option>
-                  <option value="full_name">Name</option>
-                  <option value="created">Created</option>
-                </select>
-              </div>
-            </div>
-            <div id="repo-list" class="list"></div>
-          </section>
-        </div>
+    <div class="container">
+      <div class="d-flex flex-justify-between flex-items-center mb-3">
+        <h1 class="h2">Repositories</h1>
+        <a href="./new-repo.html" class="btn btn-primary">New</a>
       </div>
 
-      <footer>
-        <small>Demo only. Do not ship secrets to the client.</small>
-      </footer>
+      <div class="Box">
+        <div class="Box-header">
+          <input id="repo-filter" class="form-control" placeholder="Find a repository..." />
+        </div>
+        <div id="repo-list"></div>
+      </div>
     </div>
 
     <script src="./js/app.js"></script>

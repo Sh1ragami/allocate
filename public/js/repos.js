@@ -17,28 +17,28 @@
     const list = document.getElementById("repo-list");
     if (!list) return;
     list.innerHTML = "";
-    list.className = "Box";
     repos.forEach(r => {
       const el = document.createElement("div");
-      el.className = "Box-row d-flex flex-items-center flex-justify-between repo-item";
+      el.className = "Box-row repo-item";
       const lang = (r.language || '').toLowerCase();
       const langColor = lang ? '#238636' : '#57606a';
       el.innerHTML = `
-        <div>
-          <div class="d-flex flex-items-center">
-            <span class="octicon octicon-repo mr-2" aria-hidden="true"></span>
-            <span class="repo-name color-fg-default">${r.name || r.full_name}</span>
-            ${r.private ? '<span class="Label ml-2">Private</span>' : '<span class="Label ml-2">Public</span>'}
+        <div class="d-flex flex-justify-between">
+          <div>
+            <h3 class="h4"><a href="#" class="repo-name">${r.full_name}</a></h3>
+            <p class="repo-meta">${r.description || ''}</p>
           </div>
-          <div class="repo-meta">
-            <span class="lang-dot" style="background:${langColor}"></span>${r.language || ''}
-            · Updated ${new Date(r.updated_at).toLocaleDateString()}
+          <div>
+            <span class="repo-meta">★ ${r.stargazers_count}</span>
           </div>
         </div>
-        <div class="repo-meta">
-          ★ ${r.stargazers_count}
-        </div>`;
-      el.addEventListener("click", () => {
+        <div class="repo-meta mt-2">
+          <span class="lang-dot" style="background:${langColor}"></span> ${r.language || ''}
+          <span class="ml-3">Updated ${new Date(r.updated_at).toLocaleDateString()}</span>
+        </div>
+      `;
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
         localStorage.setItem("selectedRepo", r.full_name);
         location.href = "./overview.html";
       });

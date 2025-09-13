@@ -1,59 +1,32 @@
 <!doctype html>
-<html lang="ja" data-color-mode="dark" data-dark-theme="dark_dimmed">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>アロケート – Sign in</title>
-    <link rel="stylesheet" href="https://unpkg.com/@primer/css@latest/dist/primer.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/build.css" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/build.css" />
   </head>
   <body>
-    <a class="skip-to-content sr-only" href="#main">Skip to content</a>
-
     <header class="Header">
-      <div class="Header-item Header-item--full">
-        <a class="Header-link brand" href="#" aria-label="Allocate home">
-          <span class="octicon octicon-mark-github" aria-hidden="true"></span>
-          <span class="brand-name">アロケート</span>
+      <div class="Header-item">
+        <a class="Header-link" href="#" aria-label="Allocate home">
+          <span class="octicon octicon-mark-github"></span>
+          <span>アロケート</span>
         </a>
       </div>
     </header>
 
-    <main id="main" class="auth-shell">
-      <!-- ブランドロゴ -->
-      <div class="brand-lockup">
-        <span class="octicon octicon-mark-github logo" aria-hidden="true"></span>
+    <main class="auth-shell">
+      <div class="auth-card">
+        <h2 class="text-center">Sign in to Allocate</h2>
+        <p class="text-center">Use your GitHub account</p>
+        <button id="login-btn" class="btn btn-primary btn-block">
+          <span class="octicon octicon-mark-github"></span>
+          Continue with GitHub
+        </button>
       </div>
-
-      <!-- ログインカード -->
-      <section class="Box auth-card" role="region" aria-labelledby="signin-title">
-        <h2 id="signin-title" class="h3 text-center">Sign in to Allocate</h2>
-        <p class="note text-center color-fg-muted">Use your GitHub account</p>
-
-        <div class="actions">
-          <button id="login-btn" class="btn btn-primary btn-large btn-block">
-            <span class="octicon octicon-mark-github mr-2" aria-hidden="true"></span>
-            Continue with GitHub
-          </button>
-        </div>
-
-        <div class="terms text-center color-fg-muted">
-          By continuing, you agree to the <a href="#" class="Link--inherited">Terms</a> and <a href="#" class="Link--inherited">Privacy Policy</a>.
-        </div>
-      </section>
-
-      <!-- 補助リンク -->
-      <nav class="aux-links text-center">
-        <a href="#" class="Link--secondary">Trouble signing in?</a>
-      </nav>
     </main>
-
-    <footer class="site-footer">
-      <div class="container-sm text-center color-fg-muted">
-        <small>Demo only. Do not ship secrets to the client.</small>
-      </div>
-    </footer>
 
     <script src="./login.js"></script>
   </body>

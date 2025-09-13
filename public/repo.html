@@ -1,75 +1,75 @@
 <!doctype html>
-<html lang="ja" data-color-mode="dark" data-dark-theme="dark_dimmed">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>アロケート - Repository</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@primer/css@latest/dist/primer.css" />
     <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/build.css" />
   </head>
   <body>
+    <header class="Header">
+      <div class="Header-item">
+        <a href="./overview.html" class="Header-link">Overview</a>
+        <a href="./index.html" class="Header-link">Repositories</a>
+      </div>
+      <div class="Header-item" id="header-user"></div>
+    </header>
+
     <div class="container">
-      <header class="hero">
-        <div class="header-bar">
-          <div class="d-flex flex-items-center">
-            <h1 class="h2">アロケート</h1>
-            <nav class="ml-4">
-              <a href="./overview.html" class="btn">Overview</a>
-              <a href="./index.html" class="btn btn-primary">Repositories</a>
-            </nav>
-          </div>
-          <div id="header-user" class="header-user"></div>
-        </div>
-      </header>
-
-      <div class="layout">
-        <div class="col">
-          <div class="d-flex flex-justify-between flex-items-center">
-            <h2 class="h3 m-0" id="repo-full-name"></h2>
-            <a href="./index.html" class="btn">Back to Repositories</a>
-          </div>
-
-            <div class="UnderlineNav my-2" id="actions-tabs">
-              <nav class="UnderlineNav-body">
-                <button class="UnderlineNav-item selected" data-panel="panel-issue">Issue</button>
-                <button class="UnderlineNav-item" data-panel="panel-pr">Pull Request</button>
-              </nav>
-            </div>
-
-            <div id="panel-issue" class="actions-panel active">
-              <h3 class="section-title">Create Issue</h3>
-              <div class="form">
-              <div class="field"><label>Title</label><input id="issue-title" placeholder="title" /></div>
-              <div class="field"><label>Body</label><textarea id="issue-body" placeholder="body (optional)"></textarea></div>
-              <div class="actions-row">
-                <button id="btn-create-issue" class="btn btn-primary">Create Issue</button>
-                <span id="res-issue" class="result"></span>
-              </div>
-              </div>
-            </div>
-
-            <div id="panel-pr" class="actions-panel">
-              <h3 class="section-title">Create Pull Request</h3>
-              <div class="form">
-              <div class="field"><label>Title</label><input id="pr-title" placeholder="title" /></div>
-              <div class="cols-2">
-                <div class="field"><label>Head</label><input id="pr-head" placeholder="head (branch or owner:branch)" /></div>
-                <div class="field"><label>Base</label><input id="pr-base" placeholder="base branch (e.g. main)" /></div>
-              </div>
-              <div class="field"><label>Body</label><textarea id="pr-body" placeholder="body (optional)"></textarea></div>
-              <div class="actions-row">
-                <button id="btn-create-pr" class="btn btn-primary">Create PR</button>
-                <span id="res-pr" class="result"></span>
-              </div>
-              </div>
-            </div>
-        </div>
+      <div class="d-flex flex-justify-between flex-items-center mb-3">
+        <h2 class="h3 m-0" id="repo-full-name"></h2>
+        <a href="./index.html" class="btn">Back to Repositories</a>
       </div>
 
-      <footer>
-        <small>Demo only. Do not ship secrets to the client.</small>
-      </footer>
+      <div class="Box">
+        <div class="Box-header">
+          <div class="UnderlineNav">
+            <div class="UnderlineNav-body">
+              <button class="UnderlineNav-item selected" data-panel="panel-issue">Issue</button>
+              <button class="UnderlineNav-item" data-panel="panel-pr">Pull Request</button>
+            </div>
+          </div>
+        </div>
+        <div id="panel-issue" class="Box-body actions-panel active">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="issue-title" class="form-control" placeholder="title" />
+          </div>
+          <div class="form-group">
+            <label>Body</label>
+            <textarea id="issue-body" class="form-control" placeholder="body (optional)"></textarea>
+          </div>
+          <div class="form-group">
+            <button id="btn-create-issue" class="btn btn-primary">Create Issue</button>
+            <span id="res-issue" class="ml-2"></span>
+          </div>
+        </div>
+        <div id="panel-pr" class="Box-body actions-panel">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="pr-title" class="form-control" placeholder="title" />
+          </div>
+          <div class="d-flex flex-wrap gutter">
+            <div class="col-6 form-group">
+              <label>Head</label>
+              <input type="text" id="pr-head" class="form-control" placeholder="head (branch or owner:branch)" />
+            </div>
+            <div class="col-6 form-group">
+              <label>Base</label>
+              <input type="text" id="pr-base" class="form-control" placeholder="base branch (e.g. main)" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Body</label>
+            <textarea id="pr-body" class="form-control" placeholder="body (optional)"></textarea>
+          </div>
+          <div class="form-group">
+            <button id="btn-create-pr" class="btn btn-primary">Create PR</button>
+            <span id="res-pr" class="ml-2"></span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="./js/app.js"></script>

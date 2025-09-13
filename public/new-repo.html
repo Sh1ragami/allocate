@@ -1,63 +1,51 @@
 <!doctype html>
-<html lang="ja" data-color-mode="dark" data-dark-theme="dark_dimmed">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>アロケート - New Repository</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@primer/css@latest/dist/primer.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/build.css" />
   </head>
   <body>
-    <div class="container">
-      <header class="hero">
-        <div class="header-bar">
-          <div class="d-flex flex-items-center">
-            <h1 class="h2">アロケート</h1>
-            <nav class="ml-4">
-              <a href="./overview.html" class="btn">Overview</a>
-              <a href="./index.html" class="btn">Repositories</a>
-            </nav>
-          </div>
-          <div id="header-user" class="header-user"></div>
-        </div>
-      </header>
+    <header class="Header">
+      <div class="Header-item">
+        <a href="./overview.html" class="Header-link">Overview</a>
+        <a href="./index.html" class="Header-link">Repositories</a>
+      </div>
+      <div class="Header-item" id="header-user"></div>
+    </header>
 
-      <div class="layout">
-        <div class="col">
-          <section class="card">
-            <div class="d-flex flex-justify-between flex-items-center">
-              <h2 class="h3 m-0">Create a New Repository</h2>
-            </div>
-            <div id="panel-repo" class="actions-panel active mt-3">
-              <div class="form">
-                <div class="cols-2">
-                  <div class="field"><label>Repository name</label><input id="repo-name" placeholder="repo-name" /></div>
-                  <div class="field"><label>Private</label><label><input type="checkbox" id="repo-private" /> private</label></div>
-                </div>
-                <div class="field"><label>Description</label><input id="repo-desc" placeholder="description (optional)" /></div>
-                <div class="field"><label>Application Idea</label><textarea id="app-idea" placeholder="Describe the application you want to build..."></textarea></div>
-                <div class="field">
-                  <label>Collaborators</label>
-                  <div id="collaborators-list"></div>
-                  <div class="d-flex flex-items-center mt-2">
-                    <input type="text" id="new-collaborator-login" class="form-control" placeholder="Search for users to add as collaborators">
-                  </div>
-                  <div id="collaborator-search-results" class="mt-2"></div>
-                </div>
-                <div class="actions-row">
-                  <button id="btn-create-repo" class="btn btn-primary">Create Repository</button>
-                  <span id="res-repo" class="result"></span>
-                </div>
-              </div>
-            </div>
-          </section>
+    <div class="container">
+      <h1 class="h2 mb-3">Create a New Repository</h1>
+      <div class="Box">
+        <div class="Box-body">
+          <div class="form-group mb-3">
+            <label>Repository name</label>
+            <input type="text" id="repo-name" class="form-control" placeholder="repo-name" />
+          </div>
+          <div class="form-group mb-3">
+            <label>Description</label>
+            <input type="text" id="repo-desc" class="form-control" placeholder="description (optional)" />
+          </div>
+          <div class="form-group mb-3">
+            <label><input type="checkbox" id="repo-private" /> Private</label>
+          </div>
+          <div class="form-group mb-3">
+            <label>Application Idea</label>
+            <textarea id="app-idea" class="form-control" placeholder="Describe the application you want to build..."></textarea>
+          </div>
+          <div class="form-group mb-3">
+            <label>Collaborators</label>
+            <div id="collaborators-list" class="mb-2"></div>
+            <input type="text" id="new-collaborator-login" class="form-control" placeholder="Search for users to add as collaborators">
+            <div id="collaborator-search-results" class="mt-2"></div>
+          </div>
+          <div class="form-group">
+            <button id="btn-create-repo" class="btn btn-primary">Create Repository</button>
+            <span id="res-repo" class="ml-2"></span>
+          </div>
         </div>
       </div>
-
-      <footer>
-        <small>Demo only. Do not ship secrets to the client.</small>
-      </footer>
     </div>
 
     <script src="./js/app.js"></script>
