@@ -3,38 +3,58 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ログイン | アロケート</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>アロケート – Sign in</title>
     <link rel="stylesheet" href="https://unpkg.com/@primer/css@latest/dist/primer.css" />
     <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/build.css" />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="container">
-      <header class="hero">
-        <div class="header-bar">
-          <div>
-            <h1>アロケート</h1>
-            <p class="desc">GitHub でログインしてはじめる</p>
-          </div>
-        </div>
-      </header>
+    <a class="skip-to-content sr-only" href="#main">Skip to content</a>
 
-      <div class="center-wrap">
-      <section class="card login-card" id="login-card">
-        <h2>Sign in with GitHub</h2>
-        <div class="actions">
-          <button id="login-btn" class="btn">Login with GitHub</button>
-        </div>
-      </section>
+    <header class="Header">
+      <div class="Header-item Header-item--full">
+        <a class="Header-link brand" href="#" aria-label="Allocate home">
+          <span class="octicon octicon-mark-github" aria-hidden="true"></span>
+          <span class="brand-name">アロケート</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="main" class="auth-shell">
+      <!-- ブランドロゴ -->
+      <div class="brand-lockup">
+        <span class="octicon octicon-mark-github logo" aria-hidden="true"></span>
       </div>
 
-      <footer>
+      <!-- ログインカード -->
+      <section class="Box auth-card" role="region" aria-labelledby="signin-title">
+        <h2 id="signin-title" class="h3 text-center">Sign in to Allocate</h2>
+        <p class="note text-center color-fg-muted">Use your GitHub account</p>
+
+        <div class="actions">
+          <button id="login-btn" class="btn btn-primary btn-large btn-block">
+            <span class="octicon octicon-mark-github mr-2" aria-hidden="true"></span>
+            Continue with GitHub
+          </button>
+        </div>
+
+        <div class="terms text-center color-fg-muted">
+          By continuing, you agree to the <a href="#" class="Link--inherited">Terms</a> and <a href="#" class="Link--inherited">Privacy Policy</a>.
+        </div>
+      </section>
+
+      <!-- 補助リンク -->
+      <nav class="aux-links text-center">
+        <a href="#" class="Link--secondary">Trouble signing in?</a>
+      </nav>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container-sm text-center color-fg-muted">
         <small>Demo only. Do not ship secrets to the client.</small>
-      </footer>
-    </div>
+      </div>
+    </footer>
 
     <script src="./login.js"></script>
   </body>
-  </html>
-
-
+</html>

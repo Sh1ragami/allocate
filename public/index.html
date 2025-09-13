@@ -12,28 +12,25 @@
     <div class="container">
       <header class="hero">
         <div class="header-bar">
-          <div>
+          <div class="d-flex flex-items-center">
             <h1 class="h2">アロケート</h1>
+            <nav class="ml-4">
+              <a href="./overview.html" class="btn">Overview</a>
+              <a href="./index.html" class="btn btn-primary">Repositories</a>
+            </nav>
           </div>
           <div id="header-user" class="header-user"></div>
         </div>
       </header>
-
-      <div class="UnderlineNav my-2" id="main-tabs">
-        <nav class="UnderlineNav-body">
-          <button class="UnderlineNav-item" data-view="progress">Progress</button>
-          <button class="UnderlineNav-item selected" data-view="repos">Repositories</button>
-        </nav>
-      </div>
 
       <div class="layout">
         <div class="col" id="col-repos">
           <section class="card" id="repo-browser">
             <div class="d-flex flex-justify-between flex-items-center">
               <h2 class="h3 m-0">Repositories</h2>
-              <button id="btn-new-repo-entry" class="btn btn-primary">
+              <a href="./new-repo.html" class="btn btn-primary">
                 <span class="octicon octicon-repo mr-2"></span>New
-              </button>
+              </a>
             </div>
             <div class="UnderlineNav my-2" id="repo-tabs">
               <nav class="UnderlineNav-body">
@@ -65,103 +62,6 @@
             <div id="repo-list" class="list"></div>
           </section>
         </div>
-
-        <div class="col" id="col-progress" style="display:none;">
-          <section class="card" id="progress-panel">
-            <h2 class="h3 m-0">Progress</h2>
-            <div class="Box mt-2">
-              <div class="Box-row">
-                <strong>Active projects</strong>
-                <div class="color-fg-muted text-small">作業中のリポジトリの稼働状況</div>
-              </div>
-              <div class="Box-row">
-                <div id="progress-stats" class="d-flex flex-wrap gap-2"></div>
-              </div>
-              <div class="Box-row">
-                <strong>Activity</strong>
-                <div id="progress-heatmap" class="mt-2"></div>
-              </div>
-            </div>
-          </section>
-          <section class="card hidden" id="gh-actions">
-            <div class="section-bar">
-              <h2>GitHub Actions</h2>
-              <button id="btn-back-to-list" class="btn btn-secondary">Back to Repositories</button>
-            </div>
-            <p class="hint">リポジトリを選択するか、新規作成を開始すると表示されます。</p>
-            <div class="selected-repo">
-              <div>Selected: <span class="name" id="selected-repo-name">(none)</span></div>
-              <button id="clear-selected-repo" class="btn btn-secondary">Clear</button>
-            </div>
-
-            <div class="UnderlineNav my-2" id="actions-tabs">
-              <nav class="UnderlineNav-body">
-                <button class="UnderlineNav-item selected" data-panel="panel-repo">Repository</button>
-                <button class="UnderlineNav-item" data-panel="panel-issue">Issue</button>
-                <button class="UnderlineNav-item" data-panel="panel-pr">Pull Request</button>
-              </nav>
-            </div>
-
-            <div class="grid">
-              <div>
-                <div id="panel-repo" class="actions-panel active">
-                  <h3 class="section-title">Create Repository</h3>
-                  <div class="form">
-                  <div class="cols-2">
-                    <div class="field"><label>Repository name</label><input id="repo-name" placeholder="repo name" /></div>
-                    <div class="field"><label>Private</label><label><input type="checkbox" id="repo-private" /> private</label></div>
-                  </div>
-                  <div class="field"><label>Description</label><input id="repo-desc" placeholder="description (optional)" /></div>
-                  <div class="actions-row">
-                    <button id="btn-create-repo" class="btn">Create Repo</button>
-                    <span id="res-repo" class="result"></span>
-                  </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div id="panel-issue" class="actions-panel">
-                  <h3 class="section-title">Create Issue</h3>
-                  <div class="form">
-                  <div class="cols-2">
-                    <div class="field"><label>Owner</label><input id="issue-owner" placeholder="owner (e.g. your-login)" /></div>
-                    <div class="field"><label>Repository</label><input id="issue-repo" placeholder="repo" /></div>
-                  </div>
-                  <div class="field"><label>Title</label><input id="issue-title" placeholder="title" /></div>
-                  <div class="field"><label>Body</label><textarea id="issue-body" placeholder="body (optional)"></textarea></div>
-                  <div class="actions-row">
-                    <button id="btn-create-issue" class="btn">Create Issue</button>
-                    <span id="res-issue" class="result"></span>
-                  </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div id="panel-pr" class="actions-panel">
-                  <h3 class="section-title">Create Pull Request</h3>
-                  <div class="form">
-                  <div class="cols-2">
-                    <div class="field"><label>Owner</label><input id="pr-owner" placeholder="owner" /></div>
-                    <div class="field"><label>Repository</label><input id="pr-repo" placeholder="repo" /></div>
-                  </div>
-                  <div class="field"><label>Title</label><input id="pr-title" placeholder="title" /></div>
-                  <div class="cols-2">
-                    <div class="field"><label>Head</label><input id="pr-head" placeholder="head (branch or owner:branch)" /></div>
-                    <div class="field"><label>Base</label><input id="pr-base" placeholder="base branch (e.g. main)" /></div>
-                  </div>
-                  <div class="field"><label>Body</label><textarea id="pr-body" placeholder="body (optional)"></textarea></div>
-                  <div class="actions-row">
-                    <button id="btn-create-pr" class="btn">Create PR</button>
-                    <span id="res-pr" class="result"></span>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
       </div>
 
       <footer>
@@ -169,6 +69,7 @@
       </footer>
     </div>
 
-    <script src="./app.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/repos.js"></script>
   </body>
 </html>

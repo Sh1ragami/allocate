@@ -3,7 +3,7 @@
 }
 
 :root {
-  --bg: #0b1020;
+  --bg: #000000;
   --bg-elev: #111827;
   --card-border: #1f2937;
   --text: #e5e7eb;
@@ -93,7 +93,7 @@ h1 {
 }
 
 .card {
-  background: transparent;
+  background: #161b22;
   border: 0;
   border-radius: var(--radius);
   padding: 18px;
