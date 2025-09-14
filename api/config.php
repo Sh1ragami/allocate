@@ -8,15 +8,13 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 // --- Environment ---
-// .env から環境変数を取得
 $GITHUB_CLIENT_ID = $_ENV['GITHUB_CLIENT_ID'] ?? '';
 $GITHUB_CLIENT_SECRET = $_ENV['GITHUB_CLIENT_SECRET'] ?? '';
 $APP_BASE_URL = $_ENV['APP_BASE_URL'] ?? (isset($_SERVER['REQUEST_SCHEME']) && isset($_SERVER['HTTP_HOST']) ? $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] : '');
 
-// --- Session ---
-ini_set('session.use_strict_mode', '1');
-session_name('gh_oauth');
-session_start();
+// --- Database ---
+$db = new PDO('sqlite:' . __DIR__ . '/db.sqlite');
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // --- CORS (adjust for production) ---
 $ALLOWED_ORIGIN = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
@@ -28,6 +26,22 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
   http_response_code(204);
   exit;
+}
+
+// --- Auth helper ---
+function get_user_from_session_token(): ?array
+{
+  global $db;
+  if (!isset($_COOKIE['session_token'])) {
+    return null;
+  }
+  $sessionToken = $_COOKIE['session_token'];
+
+  $stmt = $db->prepare("SELECT * FROM users WHERE session_token = ? AND session_token_expires_at > ?");
+  $stmt->execute([$sessionToken, time()]);
+  $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  return $user ?: null;
 }
 
 // --- JSON helpers ---
@@ -62,8 +76,6 @@ function http_post_json(string $url, array $headers, array $payload): array
   if ($status >= 400) {
     throw new Exception('HTTP status ' . $status . ': ' . $res);
   }
-  // GitHub returns application/x-www-form-urlencoded by default unless we ask JSON.
-  // But we set Accept: application/json below, so parse JSON.
   $data = json_decode($res, true);
   if (!is_array($data)) {
     throw new Exception('Invalid JSON from GitHub: ' . $res);

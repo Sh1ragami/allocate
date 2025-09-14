@@ -18,9 +18,7 @@ if ($GITHUB_CLIENT_ID === '' || $GITHUB_CLIENT_SECRET === '') {
 try {
   // 1) Exchange code for access token
   $tokenUrl = 'https://github.com/login/oauth/access_token';
-  $headers = [
-    'Accept: application/json',
-  ];
+  $headers = ['Accept: application/json'];
   $payload = [
     'client_id' => $GITHUB_CLIENT_ID,
     'client_secret' => $GITHUB_CLIENT_SECRET,
@@ -41,11 +39,37 @@ try {
     'User-Agent: php-github-oauth-demo',
   ]);
 
-  // 3) Store in session (do NOT store access token in production unless encrypted)
-  $_SESSION['user'] = $user;
-  $_SESSION['logged_in'] = true;
-  $_SESSION['login_at'] = time();
-  $_SESSION['access_token'] = $accessToken;
+  // 3) Store user and session in database
+  $stmt = $db->prepare("SELECT * FROM users WHERE github_id = ?");
+  $stmt->execute([$user['id']]);
+  $existingUser = $stmt->fetch(PDO::FETCH_ASSOC);
+
+  if ($existingUser) {
+    $stmt = $db->prepare("UPDATE users SET access_token = ?, login = ?, avatar_url = ? WHERE id = ?");
+    $stmt->execute([$accessToken, $user['login'], $user['avatar_url'], $existingUser['id']]);
+    $userId = $existingUser['id'];
+  } else {
+    $stmt = $db->prepare("INSERT INTO users (github_id, login, avatar_url, access_token) VALUES (?, ?, ?, ?)");
+    $stmt->execute([$user['id'], $user['login'], $user['avatar_url'], $accessToken]);
+    $userId = $db->lastInsertId();
+  }
+
+  // 4) Create session token
+  $sessionToken = bin2hex(random_bytes(32));
+  $expiresAt = time() + 3600 * 24 * 30; // 30 days
+
+  $stmt = $db->prepare("UPDATE users SET session_token = ?, session_token_expires_at = ? WHERE id = ?");
+  $stmt->execute([$sessionToken, $expiresAt, $userId]);
+
+  // 5) Set session cookie
+  setcookie('session_token', $sessionToken, [
+    'expires' => $expiresAt,
+    'path' => '/',
+    'domain' => '', // Set your domain in production
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Lax'
+  ]);
 
   json_out(['ok' => true, 'user' => $user]);
 } catch (Exception $e) {

@@ -1,5 +1,5 @@
 <?php
-// api/list_repos.php
+// api/search_users.php
 declare(strict_types=1);
 require __DIR__ . '/config.php';
 
@@ -12,12 +12,16 @@ if (!$user) {
   json_error('Unauthorized', 401);
 }
 
-// Optional: visibility, affiliation, per_page (max 100), page
-$perPage = isset($_GET['per_page']) ? max(1, min(100, (int)$_GET['per_page'])) : 100;
-$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-$affiliation = isset($_GET['affiliation']) ? $_GET['affiliation'] : 'owner,collaborator,organization_member';
+if (!isset($_GET['q'])) {
+  json_error('Missing search query parameter (q)', 400);
+}
+$query = trim($_GET['q']);
 
-$url = 'https://api.github.com/user/repos?per_page=' . $perPage . '&page=' . $page . '&affiliation=' . rawurlencode($affiliation);
+if ($query === '') {
+  json_out(['ok' => true, 'users' => []]);
+}
+
+$url = "https://api.github.com/search/users?q=" . urlencode($query);
 
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -41,4 +45,4 @@ if ($status >= 400 || !is_array($data)) {
   json_error('GitHub API error', $status >= 400 ? $status : 500);
 }
 
-json_out(['ok' => true, 'repos' => $data]);
+json_out(['ok' => true, 'users' => $data['items'] ?? []]);

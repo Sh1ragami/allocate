@@ -6,7 +6,9 @@ require __DIR__ . '/config.php';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   json_error('Method not allowed', 405);
 }
-if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in'] || !isset($_SESSION['access_token'])) {
+
+$user = get_user_from_session_token();
+if (!$user) {
   json_error('Unauthorized', 401);
 }
 
@@ -29,7 +31,7 @@ $ch = curl_init('https://api.github.com/user/repos');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
-  'Authorization: Bearer ' . $_SESSION['access_token'],
+  'Authorization: Bearer ' . $user['access_token'],
   'Accept: application/vnd.github+json',
   'X-GitHub-Api-Version: 2022-11-28',
   'User-Agent: php-github-oauth-demo',
@@ -47,8 +49,21 @@ curl_close($ch);
 
 $data = json_decode($res, true);
 if ($status >= 400) {
-  $msg = is_array($data) && isset($data['message']) ? $data['message'] : $res;
+  $log_file = __DIR__ . '/error.log';
+  $log_message = date('Y-m-d H:i:s') . " - GitHub API Error: " . $res . "\n";
+  file_put_contents($log_file, $log_message, FILE_APPEND);
+
+  $msg = is_array($data) && isset($data['message']) ? $data['message'] : 'Repository creation failed.';
   json_error('GitHub API error: ' . $msg, $status);
 }
+
+// Add project to database and set creator as owner
+$repoFullName = $data['full_name'];
+$stmt = $db->prepare("INSERT INTO projects (repo_full_name) VALUES (?)");
+$stmt->execute([$repoFullName]);
+$projectId = $db->lastInsertId();
+
+$stmt = $db->prepare("INSERT INTO project_users (project_id, user_id, role) VALUES (?, ?, ?)");
+$stmt->execute([$projectId, $user['id'], 'owner']);
 
 json_out(['ok' => true, 'repo' => $data]);

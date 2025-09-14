@@ -1,34 +1,32 @@
 <!doctype html>
-<html lang="ja" data-color-mode="dark" data-dark-theme="dark_dimmed">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ログイン | アロケート</title>
+    <title>アロケート – Sign in</title>
     <link rel="stylesheet" href="./styles.css" />
-    <link rel="stylesheet" href="https://unpkg.com/@primer/css@latest/dist/primer.css" />
     <link rel="stylesheet" href="https://unpkg.com/@primer/octicons@latest/build/build.css" />
   </head>
   <body>
     <header class="Header">
       <div class="Header-item">
-        <a href="./index.html" class="Header-link f4">アロケート</a>
+        <a class="Header-link" href="#" aria-label="Allocate home">
+          <span class="octicon octicon-mark-github"></span>
+          <span>アロケート</span>
+        </a>
       </div>
     </header>
 
-    <div class="container">
-      <div class="center-wrap">
-      <section class="card login-card" id="login-card">
-        <h2>Sign in with GitHub</h2>
-        <div class="actions">
-          <button id="login-btn" class="btn">Login with GitHub</button>
-        </div>
-      </section>
+    <main class="auth-shell">
+      <div class="auth-card">
+        <h2 class="text-center">Sign in to Allocate</h2>
+        <p class="text-center">Use your GitHub account</p>
+        <button id="login-btn" class="btn btn-primary btn-block">
+          <span class="octicon octicon-mark-github"></span>
+          Continue with GitHub
+        </button>
       </div>
-
-      <footer>
-        <small>Demo only. Do not ship secrets to the client.</small>
-      </footer>
-    </div>
+    </main>
 
     <script src="./login.js"></script>
   </body>

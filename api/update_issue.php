@@ -1,5 +1,5 @@
 <?php
-// api/create_issue.php
+// api/update_issue.php
 declare(strict_types=1);
 require __DIR__ . '/config.php';
 
@@ -15,30 +15,17 @@ if (!$user) {
 $input = json_decode(file_get_contents('php://input'), true) ?: [];
 $owner = isset($input['owner']) ? trim((string)$input['owner']) : '';
 $repo = isset($input['repo']) ? trim((string)$input['repo']) : '';
-$title = isset($input['title']) ? trim((string)$input['title']) : '';
-$body = isset($input['body']) ? (string)$input['body'] : '';
-$assignees = isset($input['assignees']) && is_array($input['assignees']) ? $input['assignees'] : [];
-$labels = isset($input['labels']) && is_array($input['labels']) ? $input['labels'] : [];
+$issueNumber = isset($input['issue_number']) ? (int)$input['issue_number'] : 0;
+$payload = isset($input['payload']) && is_array($input['payload']) ? $input['payload'] : [];
 
-if ($owner === '' || $repo === '' || $title === '') {
-  json_error('Missing owner/repo/title', 400);
+if ($owner === '' || $repo === '' || $issueNumber === 0 || empty($payload)) {
+  json_error('Missing owner, repo, issue_number, or payload', 400);
 }
 
-$payload = [
-  'title' => $title,
-  'body' => $body,
-];
-if (!empty($assignees)) {
-  $payload['assignees'] = $assignees;
-}
-if (!empty($labels)) {
-  $payload['labels'] = $labels;
-}
-
-$url = "https://api.github.com/repos/{$owner}/{$repo}/issues";
+$url = "https://api.github.com/repos/{$owner}/{$repo}/issues/{$issueNumber}";
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
   'Authorization: Bearer ' . $user['access_token'],
   'Accept: application/vnd.github+json',

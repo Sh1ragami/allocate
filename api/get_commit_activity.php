@@ -1,5 +1,5 @@
 <?php
-// api/list_repos.php
+// api/get_commit_activity.php
 declare(strict_types=1);
 require __DIR__ . '/config.php';
 
@@ -12,12 +12,14 @@ if (!$user) {
   json_error('Unauthorized', 401);
 }
 
-// Optional: visibility, affiliation, per_page (max 100), page
-$perPage = isset($_GET['per_page']) ? max(1, min(100, (int)$_GET['per_page'])) : 100;
-$page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-$affiliation = isset($_GET['affiliation']) ? $_GET['affiliation'] : 'owner,collaborator,organization_member';
+if (!isset($_GET['owner']) || !isset($_GET['repo'])) {
+  json_error('Missing owner or repo parameter', 400);
+}
 
-$url = 'https://api.github.com/user/repos?per_page=' . $perPage . '&page=' . $page . '&affiliation=' . rawurlencode($affiliation);
+$owner = $_GET['owner'];
+$repo = $_GET['repo'];
+
+$url = "https://api.github.com/repos/{$owner}/{$repo}/stats/commit_activity";
 
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -36,9 +38,14 @@ if ($res === false) {
 $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
+if ($status === 202) {
+  // Data is not cached yet, return empty array
+  json_out(['ok' => true, 'activity' => []]);
+}
+
 $data = json_decode($res, true);
 if ($status >= 400 || !is_array($data)) {
   json_error('GitHub API error', $status >= 400 ? $status : 500);
 }
 
-json_out(['ok' => true, 'repos' => $data]);
+json_out(['ok' => true, 'activity' => $data]);
